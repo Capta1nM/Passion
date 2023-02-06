@@ -19,6 +19,6 @@ If you have major coding issues with this bot, please join and ask for help.
 
 Contributions are always welcomed :D Make sure to follow [Contributing.md](/CONTRIBUTING.md)
 
-> **Note:** Contributions are not accepted in the master branch. If you like to contribute check out [v4 branch](https://github.com/Capta1nM/Passion)
+**Note:** Contributions are not accepted in the master branch. If you like to contribute check out [v4 branch](https://github.com/Capta1nM/Passion)
 
 Made with :heart: and JavaScript!
