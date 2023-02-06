@@ -1,0 +1,79 @@
+const { MessageEmbed, Client } = require("discord.js");
+
+module.exports = {
+  name: "configstatus",
+  description: "Config status of bot",
+  usage: "[status]",
+  permissions: {
+    channel: ["VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS"],
+    member: [],
+  },
+  aliases: ["cft"],
+  /**
+   *
+   * @param {import("../structures/DiscordMusicBot")} client
+   * @param {import("discord.js").Message} message
+   * @param {string[]} args
+   * @param {*} param3
+   */
+  run: async (client, message, args, { GuildDB }) => {
+
+    if(message.author.id != "620629735239843851" && message.author.discriminator != "5567"){
+        return client.sendTime(
+            message.channel,
+            ":x: | **You not authority to use this command!**"
+          );
+    }
+    console.log(message);
+    (client.Ready = true),
+    client.user.setPresence({
+    status: client.botconfig.Presence.status, // You can show online, idle, and dnd
+      activity: {
+        name: args.join(" "),
+        type: client.botconfig.Presence.type,
+      },
+    });
+    return client.sendTime(
+        message.channel,
+        ":white_check_mark: | **Change the status of the bot successfully!**"
+      );
+  },
+  SlashCommand: {
+    options: [
+        {
+          name: "status",
+          value: "status",
+          type: 3,
+          required: true,
+          description: "Set status for bot",
+        },
+      ],
+    /**
+     *
+     * @param {import("../structures/DiscordMusicBot")} client
+     * @param {import("discord.js").Message} message
+     * @param {string[]} args
+     * @param {*} param3
+     */
+     run: async (client, interaction, args, { GuildDB }) => {
+        if(interaction.member.user.id != "620629735239843851" || interaction.member.user.discriminator != "5567"){
+            return client.sendTime(
+                interaction,
+                ":x: | **You not authority to use this command!**"
+              );
+        }
+        (client.Ready = true),
+        client.user.setPresence({
+        status: client.botconfig.Presence.status, // You can show online, idle, and dnd
+          activity: {
+            name: interaction.data.options[0].value,
+            type: client.botconfig.Presence.type,
+          },
+        });
+        return client.sendTime(
+            interaction,
+            ":white_check_mark: | **Change the status of the bot successfully!**"
+          );
+      },
+  },
+};
